@@ -1,0 +1,7 @@
+file:
+  - test/utils/preHook.test.ts
+exit: true
+require: ts-node/register
+project: test/tsconfig.json
+spec: test/**/*.test.ts
+timeout: 60000

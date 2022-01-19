@@ -1,0 +1,69 @@
+openapi: 3.0.0
+info:
+  title: "API doc"
+  description: |
+    Description
+  version: "0.0.1"
+
+paths:
+  /login:
+    post:
+      summary: Login
+      description: Login route
+      requestBody:
+        $ref: '#/components/requestBodies/Login'
+      responses:
+        '200':
+          $ref: '#/components/responses/Login'
+        '401':
+          description: Unauthorized
+      tags:
+        - user
+
+components:
+  schemas:
+    email:
+      type: string
+      example: 'mail@mail.com'
+      description: Email
+    password:
+      type: string
+      example: 'azerty123'
+      description: Password
+
+  requestBodies:
+    Login:
+      description: Body parameters for login route
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              email:
+                $ref: '#/components/schemas/email'
+              password:
+                $ref: '#/components/schemas/password'
+
+  responses:
+    Login:
+      description: Login response
+      content:
+        application/json:
+          schema:
+            type: object
+            description: Login token response
+            properties:
+              token:
+                type: string
+                description: User token
+                example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDgsImlhdCI6MTU5NDA1NzIxNiwiZXhwIjoxNTk0MTQzNjE2fQ.5hLWHWXmi8RM_ECOzdSECCAQ7nSqHBhgy4FJ_A7QH-0
+
+tags:
+  - name: user
+    description: Everything about user
+
+x-tagGroups:
+  - name: User Management
+    tags:
+      - user
